@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance - High-End Dining</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header Section -->
+        <header class="glass-header">
+            <div class="logo">ELEGANCE</div>
+            <div class="header-controls">
+                <a href="admin.html" style="color: var(--accent-color); text-decoration: none; margin-right: 15px; font-weight: 500;">Admin</a>
+                <div class="time-slot-indicator" id="timeSlotIndicator">
+                    <span class="dot"></span>
+                    <span id="currentTimeSlot">Lunch Menu</span>
+                </div>
+                <button class="cart-btn" id="cartBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <section class="hero-section">
+                <h1>Taste the extraordinary.</h1>
+                <p>Curated selections adjusting beautifully to the hour and demand.</p>
+                <div class="filter-tabs" id="filterTabs">
+                    <button class="tab active" data-category="all">All</button>
+                    <button class="tab" data-category="mains">Mains</button>
+                    <button class="tab" data-category="starters">Starters</button>
+                    <button class="tab" data-category="drinks">Beverages</button>
+                    <button class="tab" data-category="desserts">Desserts</button>
+                </div>
+            </section>
+
+            <!-- Menu Board -->
+            <section class="menu-board">
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Cards will be injected here via JS -->
+                </div>
+            </section>
+
+            <!-- Recommendations Section -->
+            <section class="recommendations hidden" id="recommendationsSection">
+                <h2>Perfect Pairings</h2>
+                <div class="menu-grid" id="recommendationsGrid">
+                    <!-- Recommended cards here -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Modals and Overlays -->
+        <div class="modal-overlay" id="nutritionModal">
+            <div class="glass-modal">
+                <button class="close-btn" id="closeNutritionBtn">×</button>
+                <h3 id="nutritionTitle">Nutrition Facts</h3>
+                <div class="nutrition-content" id="nutritionContent">
+                    <!-- Nutrition data injected here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="orderTypeModal">
+            <div class="glass-modal" style="text-align: center;">
+                <h3>Welcome to Elegance</h3>
+                <p style="margin-bottom: 20px; color: var(--text-muted); margin-top: 10px;">How would you like to enjoy your meal?</p>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <button class="add-btn" id="dineInBtn" style="flex: 1;">Dine In</button>
+                    <button class="add-btn" id="orderLocationBtn" style="flex: 1;">Order at Location</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-cart" id="sidebarCart">
+            <div class="cart-header">
+                <h3>Your Order</h3>
+                <button class="close-btn" id="closeCartBtn">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items injected here -->
+            </div>
+            <div class="cart-summary">
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">₹0.00</span>
+                </div>
+                <div class="summary-line dynamic-pricing-alert" id="pricingAlert" style="display:none;">
+                    <span>Demand pricing adjustment</span>
+                    <span id="cartPricingAdjustment"></span>
+                </div>
+                <div class="summary-line total">
+                    <span>Total</span>
+                    <span id="cartTotal">₹0.00</span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Fixed Visible QR Code -->
+        <div class="fixed-qr-container" id="fixedQrContainer">
+            <div id="qrcode"></div>
+            <div class="qr-label">Scan to Access</div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

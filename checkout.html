@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Elegance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+    <header class="glass-header">
+        <div class="logo">ELEGANCE CHECKOUT</div>
+        <div class="header-controls">
+            <a href="index.html" class="nav-link">Back to Menu</a>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-grid">
+            <!-- Left Column: Forms -->
+            <div class="checkout-forms">
+                <!-- User Info -->
+                <section class="checkout-section">
+                    <h2>1. Contact Information</h2>
+                    <div class="form-group row">
+                        <div class="input-wrap">
+                            <label>Full Name *</label>
+                            <input type="text" id="fullName" required placeholder="Your name">
+                        </div>
+                        <div class="input-wrap">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="phone" required placeholder="Enter your number" pattern="^[6-9][0-9]{9}$">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-wrap">
+                            <label>Email Address</label>
+                            <input type="email" id="email" placeholder="xyz@gmail.com">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Map & Location -->
+                <section class="checkout-section">
+                    <div class="section-header-flex" style="flex-wrap: wrap; gap: 10px;">
+                        <h2>2. Delivery Location</h2>
+                        <div style="display: flex; gap: 10px; flex: 1; min-width: 300px; position: relative;">
+                            <input type="text" id="addressSearch" placeholder="Search your location..." style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: rgba(0,0,0,0.2); color: var(--text-color);">
+                            <div id="addressSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-color); border: 1px solid var(--card-border); z-index: 1000; border-radius: 8px; max-height: 200px; overflow-y: auto; display: none;"></div>
+                            
+                            <button type="button" id="useLocationBtn" class="location-btn" style="white-space: nowrap; flex-shrink: 0;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 5px; vertical-align: text-bottom;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Current Location
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container-wrap">
+                        <div id="map"></div>
+                        <div class="map-overlay-text">Drag marker to exact location</div>
+                    </div>
+
+                    <div class="form-group address-grid">
+                        <div class="input-wrap full-width">
+                            <label>Address Line 1 (House/Flat No, Building, Street) *</label>
+                            <input type="text" id="address1" required>
+                        </div>
+                        <div class="input-wrap full-width">
+                            <label>Address Line 2 (Area, Sector)</label>
+                            <input type="text" id="address2">
+                        </div>
+                        <div class="input-wrap">
+                            <label>City *</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        <div class="input-wrap">
+                            <label>State *</label>
+                            <input type="text" id="state" required>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Pincode *</label>
+                            <input type="text" id="pincode" required>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Landmark</label>
+                            <input type="text" id="landmark">
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Payment -->
+                <section class="checkout-section">
+                    <h2>3. Payment Method</h2>
+                    <div class="payment-options">
+                        <label class="pay-option active">
+                            <input type="radio" name="payment" value="cod" checked>
+                            <div class="pay-details">
+                                <span class="pay-title">Cash on Delivery</span>
+                                <span class="pay-desc">Pay at your doorstep</span>
+                            </div>
+                        </label>
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="upi">
+                            <div class="pay-details">
+                                <span class="pay-title">UPI</span>
+                                <span class="pay-desc">Google Pay, PhonePe, Paytm</span>
+                            </div>
+                        </label>
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="card">
+                            <div class="pay-details">
+                                <span class="pay-title">Credit / Debit Card</span>
+                                <span class="pay-desc">Visa, Mastercard, RuPay</span>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Order Summary -->
+            <div class="order-summary-sidebar">
+                <div class="sticky-wrap">
+                    <section class="checkout-section summary-card">
+                        <h2>Order Summary</h2>
+                        <div class="order-items-list" id="checkoutItems">
+                            <!-- Injected via JS -->
+                        </div>
+                        
+                        <div class="bill-details">
+                            <div class="bill-row">
+                                <span>Item Total</span>
+                                <span id="billSubtotal">₹0.00</span>
+                            </div>
+                            <div class="bill-row" id="billDynamicRow" style="display:none;">
+                                <span>Peak Surcharge</span>
+                                <span id="billDynamicFee">₹0.00</span>
+                            </div>
+                            <div class="bill-row">
+                                <span>Delivery Fee</span>
+                                <span id="billDeliveryFee">₹40.00</span>
+                            </div>
+                            <div class="bill-row total">
+                                <span>To Pay</span>
+                                <span id="billTotal">₹0.00</span>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="place-order-btn" id="placeOrderBtn">Place Order</button>
+                    </section>
+                    
+                    <!-- QR Code Block for Payment/Tracking Mock -->
+                    <section class="checkout-section qr-section text-center">
+                        <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 15px; font-weight: 500;">Pay via QR</p>
+                        <img id="trackingQR" src="" alt="Payment QR Code" style="border-radius: 8px; width: 150px; height: 150px; border: 3px solid var(--card-border); background: white;">
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

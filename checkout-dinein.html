@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dine-In Checkout - Elegance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+    <header class="glass-header">
+        <div class="logo">ELEGANCE DINE-IN</div>
+        <div class="header-controls">
+            <a href="index.html" class="nav-link">Back to Menu</a>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-grid">
+            <!-- Left Column: Forms -->
+            <div class="checkout-forms">
+                <!-- User Info -->
+                <section class="checkout-section">
+                    <h2>1. Your Details</h2>
+                    <div class="form-group row">
+                        <div class="input-wrap">
+                            <label>Full Name *</label>
+                            <input type="text" id="fullName" required placeholder="Your name">
+                        </div>
+                        <div class="input-wrap">
+                            <label>Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Optional for dine in">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Table Info -->
+                <section class="checkout-section">
+                    <h2>2. Table Details</h2>
+                    <div class="form-group">
+                        <div class="input-wrap full-width">
+                            <label>Table Number *</label>
+                            <select id="tableNumber" required style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--card-border); color: var(--text-color); border-radius: 8px;">
+                                <option value="" disabled selected>Select your table</option>
+                                <option value="1">Table 1</option>
+                                <option value="2">Table 2</option>
+                                <option value="3">Table 3</option>
+                                <option value="4">Table 4</option>
+                                <option value="5">Table 5</option>
+                                <option value="VIP 1">VIP 1</option>
+                                <option value="VIP 2">VIP 2</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Payment -->
+                <section class="checkout-section">
+                    <h2>3. Payment Method</h2>
+                    <div class="payment-options">
+                        <label class="pay-option active">
+                            <input type="radio" name="payment" value="counter" checked>
+                            <div class="pay-details">
+                                <span class="pay-title">Pay at Counter</span>
+                                <span class="pay-desc">Settle your bill after eating</span>
+                            </div>
+                        </label>
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="upi">
+                            <div class="pay-details">
+                                <span class="pay-title">UPI</span>
+                                <span class="pay-desc">Pay from table directly</span>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Order Summary -->
+            <div class="order-summary-sidebar">
+                <div class="sticky-wrap">
+                    <section class="checkout-section summary-card">
+                        <h2>Order Summary</h2>
+                        <div class="order-items-list" id="checkoutItems">
+                            <!-- Injected via JS -->
+                        </div>
+                        
+                        <div class="bill-details">
+                            <div class="bill-row">
+                                <span>Item Total</span>
+                                <span id="billSubtotal">₹0.00</span>
+                            </div>
+                            <div class="bill-row" id="billDynamicRow" style="display:none;">
+                                <span>Peak Surcharge</span>
+                                <span id="billDynamicFee">₹0.00</span>
+                            </div>
+                            <!-- No Delivery Fee -->
+                            <div class="bill-row total">
+                                <span>To Pay</span>
+                                <span id="billTotal">₹0.00</span>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="place-order-btn" id="placeOrderBtn">Confirm Order</button>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/checkout-dinein.js"></script>
+</body>
+</html>
